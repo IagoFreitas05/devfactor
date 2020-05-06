@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="connectivity">
+        <param name="android-package" value="com.appfeel.cordova.connectivity.Connectivity" />
+    </feature>
+    <feature name="AdMobAds">
+        <param name="android-package" value="com.appfeel.cordova.admob.AdMobAds" />
+    </feature>
+    <name>GenKcal</name>
+    <description>
+        Calculadora de metabolismo basal.
+    </description>
+    <author email="contato@devfactor.com.br" href="https://devfactor.com.br/">
+        devfactor
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://devfactor.com.br" />
+    <allow-intent href="https://devfactor.com.br" />
+    <allow-intent href="tel:" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:contato@devfactor.com.br" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+    <icon density="hdpi" src="www/android/mipmap-hdpi/ic_launcher.png" />
+    <icon density="mdpi" src="www/android/mipmap-mdpi/ic_launcher.png" />
+    <icon density="xhdpi" src="www/android/mipmap-xhdpi/ic_launcher.png" />
+    <icon density="xxhdpi" src="www/android/mipmap-xxhdpi/ic_launcher.png" />
+    <icon density="xxxhdpi" src="www/android/mipmap-xxxhdpi/ic_launcher.png" />
+    <preference name="loglevel" value="DEBUG" />
+</widget>
