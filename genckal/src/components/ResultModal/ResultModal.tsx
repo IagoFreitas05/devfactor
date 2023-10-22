@@ -2,12 +2,13 @@ import {Modal, Text} from "react-native";
 import {CloseButton, ModalBody, TextBody, Title} from "./styles";
 import React, {useState} from "react";
 
-interface Userdata {
+export interface Userdata {
     age: number;
     gender: string;
     high: number,
     weight: number,
-    setAcvity: number
+    activity: number,
+    tmb: number
 }
 
 interface MatchModalProps {
@@ -21,11 +22,6 @@ export function ResultModal({visible, onClose, match}: MatchModalProps) {
         return null;
     }
 
-    const [tbm, setTbm] = useState(Math.round(
-        match.gender === 'female'
-            ? (655 + (9.6 * match.weight) + (1.8 * match.high) - (4.7 * match.age))
-            : (66 + (13.7 * match.weight) + (5 * match.high) - (6.8 * match.age))
-    ))
     return (<>
         <Modal
             visible={visible}
@@ -39,13 +35,13 @@ export function ResultModal({visible, onClose, match}: MatchModalProps) {
                 <TextBody>altura: {match.high} cm </TextBody>
                 <TextBody></TextBody>
                 <Title>Resultados: </Title>
-                <TextBody>Seu metabolismo basal é: {tbm}</TextBody>
+                <TextBody>Seu metabolismo basal é: {match.tmb}</TextBody>
                 <TextBody>Manter seu peso você precisa consumir em
-                    média: {Math.round(tbm * match.setAcvity)} </TextBody>
+                    média: {Math.round(match.tmb * match.activity)} </TextBody>
                 <TextBody>Aumentar seu peso você precisa consumir em
-                    média:{Math.round(tbm * match.setAcvity) + 450} </TextBody>
+                    média:{Math.round(match.tmb * match.activity) + 450} </TextBody>
                 <TextBody>Diminuir seu peso você precisa consumir em
-                    média:{Math.round(tbm * match.setAcvity) - 450} </TextBody>
+                    média:{Math.round(match.tmb * match.activity) - 450} </TextBody>
             </ModalBody>
         </Modal>
     </>)

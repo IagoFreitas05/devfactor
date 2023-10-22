@@ -2,7 +2,7 @@ import {FormBody, FormHeader, Title} from "./style";
 import {StyleSheet, Text, TextInput, TouchableOpacity} from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import {useState} from "react";
-import {ResultModal} from "../ResultModal/ResultModal";
+import {ResultModal, Userdata} from "../ResultModal/ResultModal";
 
 const styles = StyleSheet.create({
     TextInput: {
@@ -68,23 +68,33 @@ export default function Form() {
         {label: 'Atividade muito intensa', value: 1.9},
     ]);
     const [gender, setGender] = useState("");
-    const [activity, setAcvity] = useState(0);
+    const [activity, setActivity] = useState(0);
     const [age, setAge] = useState(0);
     const [high, setHigh] = useState(0);
     const [weight, setWeight] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
+    const [userData, setUserData] = useState<Userdata>({} as Userdata);
+    function handleOpenModal(){
+        setUserData({
+            age: age,
+            gender: gender,
+            high: high,
+            weight: weight,
+            activity: activity,
+            tmb: Math.round(
+                gender === 'female'
+                    ? (655 + (9.6 * weight) + (1.8 * high) - (4.7 * age))
+                    : (66 + (13.7 * weight) + (5 * high) - (6.8 * age))
+            )
+        });
+        setModalVisible(true);
+    }
     return (
         <>
             <ResultModal
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
-                match={{
-                    age: age,
-                    gender: gender,
-                    high: high,
-                    weight: weight,
-                    setAcvity: activity
-                }}></ResultModal>
+                match={userData}></ResultModal>
             <FormHeader>
                 <Title>GenKcal</Title>
             </FormHeader>
@@ -123,13 +133,13 @@ export default function Form() {
                     value={activity}
                     items={actLevel}
                     setOpen={setOpenAct}
-                    setValue={setAcvity}
+                    setValue={setActivity}
                     setItems={setActLevel}
                 />
                 <TouchableOpacity
                     style={styles.ButtonInput}
                     onPress={() => {
-                        setModalVisible(true);
+                        handleOpenModal();
                     }}
                 ><Text style={styles.ButtonText}>Calcular</Text></TouchableOpacity>
             </FormBody>
